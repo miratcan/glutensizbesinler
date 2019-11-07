@@ -1,6 +1,7 @@
 
+from django.db.models import Q
 from django.views import generic
-from search_views.filters import BaseFilter
+from search_views.filters import BaseFilter, build_q
 from search_views.search import SearchListView
 
 from . import models
@@ -8,9 +9,16 @@ from .forms import ProductSearchForm
 
 
 class ProductFilter(BaseFilter):
+
     search_fields = {
         'q' : ['name', ],
     }
+
+    @classmethod
+    def build_q(cls, params, request=None):
+        if not params.get('q'):
+            return Q(pk=None)
+        return build_q(cls.get_search_fields(), params, request)
 
 
 class SupplierListView(generic.ListView):
@@ -37,6 +45,7 @@ class ProductListView(SearchListView):
     filter_class = ProductFilter
     template_name = 'index.html'
     prefetch_fields = ['brand', ]
+
 
 class ProductDetailView(generic.DetailView):
     model = models.Product
