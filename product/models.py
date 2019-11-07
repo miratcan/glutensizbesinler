@@ -32,9 +32,6 @@ class BaseModel(models.Model):
 
 class SupplierType(BaseModel, NameAndSlug):
 
-    class Meta:
-        pass
-
     def get_absolute_url(self):
         return reverse("supplier_type_detail", args=(self.pk,))
 
@@ -64,13 +61,11 @@ class Product(BaseModel, NameAndSlug):
     #  Relationships
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to="upload/images/products/", null=True, blank=True)
+    photo = models.ImageField(
+        upload_to="upload/images/products/", null=True, blank=True)
 
     #  Fields
     gluten_status = models.NullBooleanField(choices=GLUTEN_STATUSES)
-
-    class Meta:
-        pass
 
     def __str__(self):
         return str(self.name)
@@ -88,9 +83,6 @@ class Evidence(BaseModel):
     photo = models.ImageField(upload_to="upload/images/evidences/")
     note = models.TextField(null=True, blank=True)
     gluten_status = models.NullBooleanField(choices=GLUTEN_STATUSES)
-
-    class Meta:
-        pass
 
     def __str__(self):
         return str(self.pk)
