@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="m-2"><h4>product</h4></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'product_NameAndSlug_list' %}">NameAndSlug Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'product_BaseModel_list' %}">BaseModel Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'product_Supplier_list' %}">Supplier Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'product_Brand_list' %}">Brand Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'product_Product_list' %}">Product Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'product_SupplierType_list' %}">SupplierType Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'product_Evidence_list' %}">Evidence Listing</a></div>
+{% endblock %}

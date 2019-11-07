@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'product_Evidence_list' %}">
+    Evidence Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>photo</td><td>{{ object.photo }}</td></tr>
+    <tr><td>note</td><td>{{ object.note }}</td></tr>
+    <tr><td>gluten_status</td><td>{{ object.gluten_status }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}
