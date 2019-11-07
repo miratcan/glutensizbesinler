@@ -5,11 +5,17 @@
 
 <div class="row mt-3">
 <table class="table">
-  <tr><th>Ürün Adı</th><td>{{ object.name }}</td>
-  <tr><th>Marka</th><td>{{ object.brand }}</td>
-  <tr><th>Tedarikçiler</th><td></td></tr>
-  <tr><th>Gluten Durumu</th><td>{{ object.get_gluten_status_display }}</td>
+  <tr><th>Product Name</th><td>{{ object.name }}</td>
+  <tr><th>Brand</th><td><a href="{% url 'brand_detail' object.brand.pk %}">{{ object.brand }}</a></td>
+  <tr><th>Photo</th><td><img src="{{ object.photo.url }}" /></td>
+
+  <tr><th>Suppliers</th><td></td></tr>
+  <tr><th>Gluten Status</th><td>{{ object.get_gluten_status_display }}</td>
 </table>
+</div>
+
+<div class="row">
+  <button class="btn btn-secondary">Send Evidence</button>
 </div>
 
 {% endblock %}

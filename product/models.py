@@ -64,6 +64,7 @@ class Product(BaseModel, NameAndSlug):
     #  Relationships
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to="upload/images/products/", null=True, blank=True)
 
     #  Fields
     gluten_status = models.NullBooleanField(choices=GLUTEN_STATUSES)
@@ -72,7 +73,7 @@ class Product(BaseModel, NameAndSlug):
         pass
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.name)
 
     def get_absolute_url(self):
         return reverse("product_detail", args=(self.pk,))

@@ -1,54 +1,58 @@
+
 from django.views import generic
+from search_views.filters import BaseFilter
+from search_views.search import SearchListView
+
 from . import models
-from . import forms
+from .forms import ProductSearchForm
+
+
+class ProductFilter(BaseFilter):
+    search_fields = {
+        'q' : ['name', ],
+    }
 
 
 class SupplierListView(generic.ListView):
     model = models.Supplier
-    form_class = forms.SupplierForm
 
 
 class SupplierDetailView(generic.DetailView):
     model = models.Supplier
-    form_class = forms.SupplierForm
 
 
 class BrandListView(generic.ListView):
     model = models.Brand
-    form_class = forms.BrandForm
 
 
 class BrandDetailView(generic.DetailView):
     model = models.Brand
-    form_class = forms.BrandForm
 
 
-class ProductListView(generic.ListView):
+class ProductListView(SearchListView):
     model = models.Product
-    form_class = forms.ProductForm
-
+    paginate_by = 20
+    page_kwarg = 'p'
+    form_class = ProductSearchForm
+    filter_class = ProductFilter
+    template_name = 'index.html'
+    prefetch_fields = ['brand', ]
 
 class ProductDetailView(generic.DetailView):
     model = models.Product
-    form_class = forms.ProductForm
 
 
 class SupplierTypeListView(generic.ListView):
     model = models.SupplierType
-    form_class = forms.SupplierTypeForm
 
 
 class SupplierTypeDetailView(generic.DetailView):
     model = models.SupplierType
-    form_class = forms.SupplierTypeForm
 
 
 class EvidenceListView(generic.ListView):
     model = models.Evidence
-    form_class = forms.EvidenceForm
 
 
 class EvidenceDetailView(generic.DetailView):
     model = models.Evidence
-    form_class = forms.EvidenceForm
-
