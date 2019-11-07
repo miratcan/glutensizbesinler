@@ -6,8 +6,6 @@ from . import views
 
 
 router = routers.DefaultRouter()
-router.register("NameAndSlug", api.NameAndSlugViewSet)
-router.register("BaseModel", api.BaseModelViewSet)
 router.register("Supplier", api.SupplierViewSet)
 router.register("Brand", api.BrandViewSet)
 router.register("Product", api.ProductViewSet)
@@ -16,14 +14,6 @@ router.register("Evidence", api.EvidenceViewSet)
 
 urlpatterns = (
     path("api/v1/", include(router.urls)),
-    path("product/NameAndSlug/", views.NameAndSlugListView.as_view(), name="product_NameAndSlug_list"),
-    path("product/NameAndSlug/create/", views.NameAndSlugCreateView.as_view(), name="product_NameAndSlug_create"),
-    path("product/NameAndSlug/detail/<slug:slug>/", views.NameAndSlugDetailView.as_view(), name="product_NameAndSlug_detail"),
-    path("product/NameAndSlug/update/<slug:slug>/", views.NameAndSlugUpdateView.as_view(), name="product_NameAndSlug_update"),
-    path("product/BaseModel/", views.BaseModelListView.as_view(), name="product_BaseModel_list"),
-    path("product/BaseModel/create/", views.BaseModelCreateView.as_view(), name="product_BaseModel_create"),
-    path("product/BaseModel/detail/<int:pk>/", views.BaseModelDetailView.as_view(), name="product_BaseModel_detail"),
-    path("product/BaseModel/update/<int:pk>/", views.BaseModelUpdateView.as_view(), name="product_BaseModel_update"),
     path("product/Supplier/", views.SupplierListView.as_view(), name="product_Supplier_list"),
     path("product/Supplier/create/", views.SupplierCreateView.as_view(), name="product_Supplier_create"),
     path("product/Supplier/detail/<int:pk>/", views.SupplierDetailView.as_view(), name="product_Supplier_detail"),

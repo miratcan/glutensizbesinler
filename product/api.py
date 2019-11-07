@@ -3,23 +3,6 @@ from rest_framework import viewsets, permissions
 from . import serializers
 from . import models
 
-
-class NameAndSlugViewSet(viewsets.ModelViewSet):
-    """ViewSet for the NameAndSlug class"""
-
-    queryset = models.NameAndSlug.objects.all()
-    serializer_class = serializers.NameAndSlugSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class BaseModelViewSet(viewsets.ModelViewSet):
-    """ViewSet for the BaseModel class"""
-
-    queryset = models.BaseModel.objects.all()
-    serializer_class = serializers.BaseModelSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
 class SupplierViewSet(viewsets.ModelViewSet):
     """ViewSet for the Supplier class"""
 

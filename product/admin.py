@@ -4,44 +4,6 @@ from django import forms
 from . import models
 
 
-class NameAndSlugAdminForm(forms.ModelForm):
-
-    class Meta:
-        model = models.NameAndSlug
-        fields = "__all__"
-
-
-class NameAndSlugAdmin(admin.ModelAdmin):
-    form = NameAndSlugAdminForm
-    list_display = [
-        "slug",
-        "name",
-    ]
-    readonly_fields = [
-        "slug",
-        "name",
-    ]
-
-
-class BaseModelAdminForm(forms.ModelForm):
-
-    class Meta:
-        model = models.BaseModel
-        fields = "__all__"
-
-
-class BaseModelAdmin(admin.ModelAdmin):
-    form = BaseModelAdminForm
-    list_display = [
-        "updated_at",
-        "created_at",
-    ]
-    readonly_fields = [
-        "updated_at",
-        "created_at",
-    ]
-
-
 class SupplierAdminForm(forms.ModelForm):
 
     class Meta:
@@ -52,11 +14,7 @@ class SupplierAdminForm(forms.ModelForm):
 class SupplierAdmin(admin.ModelAdmin):
     form = SupplierAdminForm
     list_display = [
-        "phone_number",
-        "google_place_id",
-        "address",
-    ]
-    readonly_fields = [
+        "name",
         "phone_number",
         "google_place_id",
         "address",
@@ -73,6 +31,7 @@ class BrandAdminForm(forms.ModelForm):
 class BrandAdmin(admin.ModelAdmin):
     form = BrandAdminForm
     list_display = [
+        "name"
     ]
     readonly_fields = [
     ]
@@ -88,6 +47,8 @@ class ProductAdminForm(forms.ModelForm):
 class ProductAdmin(admin.ModelAdmin):
     form = ProductAdminForm
     list_display = [
+        "name",
+        "brand",
         "gluten_status",
     ]
     readonly_fields = [
@@ -104,8 +65,6 @@ class SupplierTypeAdminForm(forms.ModelForm):
 
 class SupplierTypeAdmin(admin.ModelAdmin):
     form = SupplierTypeAdminForm
-    list_display = [
-    ]
     readonly_fields = [
     ]
 
@@ -131,8 +90,6 @@ class EvidenceAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(models.NameAndSlug, NameAndSlugAdmin)
-admin.site.register(models.BaseModel, BaseModelAdmin)
 admin.site.register(models.Supplier, SupplierAdmin)
 admin.site.register(models.Brand, BrandAdmin)
 admin.site.register(models.Product, ProductAdmin)
