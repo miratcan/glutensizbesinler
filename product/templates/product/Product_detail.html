@@ -2,16 +2,14 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    
-<p>
-    <a class="btn btn-light" href="{% url 'product_Product_list' %}">
-    Product Listing
-    </a>
-</p>
-    
+
+<div class="row mt-3">
 <table class="table">
-    <tr><td>gluten_status</td><td>{{ object.gluten_status }}</td></tr>
+  <tr><th>Ürün Adı</th><td>{{ object.name }}</td>
+  <tr><th>Marka</th><td>{{ object.brand }}</td>
+  <tr><th>Tedarikçiler</th><td></td></tr>
+  <tr><th>Gluten Durumu</th><td>{{ object.get_gluten_status_display }}</td>
 </table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+</div>
 
 {% endblock %}

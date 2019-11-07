@@ -1,9 +1,7 @@
 import pytest
 import test_helpers
-
-from django.urls import reverse
 from django.test import Client
-
+from django.urls import reverse
 
 pytestmark = [pytest.mark.django_db]
 
@@ -12,7 +10,7 @@ def tests_Supplier_list_view():
     instance1 = test_helpers.create_product_Supplier()
     instance2 = test_helpers.create_product_Supplier()
     client = Client()
-    url = reverse("product_Supplier_list")
+    url = reverse("supplier_list")
     response = client.get(url)
     assert response.status_code == 200
     assert str(instance1) in response.content.decode("utf-8")

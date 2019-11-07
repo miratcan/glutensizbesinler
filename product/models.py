@@ -1,6 +1,12 @@
 from django.db import models
 from django.urls import reverse
 
+GLUTEN_STATUSES = (
+    (None, 'Unknown'),
+    (True, 'Exists'),
+    (False, 'Does not exists'),
+)
+
 
 class NameAndSlug(models.Model):
 
@@ -30,10 +36,7 @@ class SupplierType(BaseModel, NameAndSlug):
         pass
 
     def get_absolute_url(self):
-        return reverse("product_SupplierType_detail", args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse("product_SupplierType_update", args=(self.pk,))
+        return reverse("supplier_type_detail", args=(self.pk,))
 
 
 class Supplier(BaseModel, NameAndSlug):
@@ -47,22 +50,13 @@ class Supplier(BaseModel, NameAndSlug):
     address = models.TextField(null=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse("product_Supplier_detail", args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse("product_Supplier_update", args=(self.pk,))
+        return reverse("supplier_detail", args=(self.pk,))
 
 
 class Brand(BaseModel, NameAndSlug):
 
-    class Meta:
-        pass
-
     def get_absolute_url(self):
-        return reverse("product_Brand_detail", args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse("product_Brand_update", args=(self.pk,))
+        return reverse("brand_detail", args=(self.pk,))
 
 
 class Product(BaseModel, NameAndSlug):
@@ -72,7 +66,7 @@ class Product(BaseModel, NameAndSlug):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
 
     #  Fields
-    gluten_status = models.NullBooleanField()
+    gluten_status = models.NullBooleanField(choices=GLUTEN_STATUSES)
 
     class Meta:
         pass
@@ -81,10 +75,7 @@ class Product(BaseModel, NameAndSlug):
         return str(self.pk)
 
     def get_absolute_url(self):
-        return reverse("product_Product_detail", args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse("product_Product_update", args=(self.pk,))
+        return reverse("product_detail", args=(self.pk,))
 
 
 class Evidence(BaseModel):
@@ -95,7 +86,7 @@ class Evidence(BaseModel):
     #  Fields
     photo = models.ImageField(upload_to="upload/images/evidences/")
     note = models.TextField(null=True, blank=True)
-    gluten_status = models.NullBooleanField()
+    gluten_status = models.NullBooleanField(choices=GLUTEN_STATUSES)
 
     class Meta:
         pass
@@ -104,7 +95,4 @@ class Evidence(BaseModel):
         return str(self.pk)
 
     def get_absolute_url(self):
-        return reverse("product_Evidence_detail", args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse("product_Evidence_update", args=(self.pk,))
+        return reverse("evidence_detail", args=(self.pk,))

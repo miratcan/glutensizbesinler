@@ -1,9 +1,7 @@
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework import routers
 
-from . import api
-from . import views
-
+from . import api, views
 
 router = routers.DefaultRouter()
 router.register("Supplier", api.SupplierViewSet)
@@ -14,24 +12,17 @@ router.register("Evidence", api.EvidenceViewSet)
 
 urlpatterns = (
     path("api/v1/", include(router.urls)),
-    path("product/Supplier/", views.SupplierListView.as_view(), name="product_Supplier_list"),
-    path("product/Supplier/create/", views.SupplierCreateView.as_view(), name="product_Supplier_create"),
-    path("product/Supplier/detail/<int:pk>/", views.SupplierDetailView.as_view(), name="product_Supplier_detail"),
-    path("product/Supplier/update/<int:pk>/", views.SupplierUpdateView.as_view(), name="product_Supplier_update"),
-    path("product/Brand/", views.BrandListView.as_view(), name="product_Brand_list"),
-    path("product/Brand/create/", views.BrandCreateView.as_view(), name="product_Brand_create"),
-    path("product/Brand/detail/<int:pk>/", views.BrandDetailView.as_view(), name="product_Brand_detail"),
-    path("product/Brand/update/<int:pk>/", views.BrandUpdateView.as_view(), name="product_Brand_update"),
-    path("product/Product/", views.ProductListView.as_view(), name="product_Product_list"),
-    path("product/Product/create/", views.ProductCreateView.as_view(), name="product_Product_create"),
-    path("product/Product/detail/<int:pk>/", views.ProductDetailView.as_view(), name="product_Product_detail"),
-    path("product/Product/update/<int:pk>/", views.ProductUpdateView.as_view(), name="product_Product_update"),
-    path("product/SupplierType/", views.SupplierTypeListView.as_view(), name="product_SupplierType_list"),
-    path("product/SupplierType/create/", views.SupplierTypeCreateView.as_view(), name="product_SupplierType_create"),
-    path("product/SupplierType/detail/<int:pk>/", views.SupplierTypeDetailView.as_view(), name="product_SupplierType_detail"),
-    path("product/SupplierType/update/<int:pk>/", views.SupplierTypeUpdateView.as_view(), name="product_SupplierType_update"),
-    path("product/Evidence/", views.EvidenceListView.as_view(), name="product_Evidence_list"),
-    path("product/Evidence/create/", views.EvidenceCreateView.as_view(), name="product_Evidence_create"),
-    path("product/Evidence/detail/<int:pk>/", views.EvidenceDetailView.as_view(), name="product_Evidence_detail"),
-    path("product/Evidence/update/<int:pk>/", views.EvidenceUpdateView.as_view(), name="product_Evidence_update"),
+    path("suppliers/", views.SupplierListView.as_view(), name="supplier_list"),
+    path("supplier/<int:pk>/",
+        views.SupplierDetailView.as_view(), name="supplier_detail"),
+    path("brands/", views.BrandListView.as_view(), name="brand_list"),
+    path("brand/<int:pk>/", views.BrandDetailView.as_view(), name="brand_detail"),
+    path("", views.ProductListView.as_view(), name="product_list"),
+    path("detail/<int:pk>/", views.ProductDetailView.as_view(), name="product_detail"),
+    path("supplier_types/", views.SupplierTypeListView.as_view(),
+        name="supplier_type_list"),
+    path("supplier_type/<int:pk>/", views.SupplierTypeDetailView.as_view(),
+        name="supplier_type_detail"),
+    path("evidences/", views.EvidenceListView.as_view(), name="evidence_list"),
+    path("evidence/<int:pk>/", views.EvidenceDetailView.as_view(), name="evidence_detail"),
 )

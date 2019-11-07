@@ -4,7 +4,7 @@
 {% block content %}
     
 <p>
-    <a class="btn btn-light" href="{% url 'product_Evidence_list' %}">
+    <a class="btn btn-light" href="{% url 'evidence_list' %}">
     Evidence Listing
     </a>
 </p>
@@ -14,6 +14,5 @@
     <tr><td>note</td><td>{{ object.note }}</td></tr>
     <tr><td>gluten_status</td><td>{{ object.gluten_status }}</td></tr>
 </table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
 
 {% endblock %}
