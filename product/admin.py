@@ -86,11 +86,6 @@ class EvidenceAdmin(admin.ModelAdmin):
         "note",
         "gluten_status",
     ]
-    readonly_fields = [
-        "photo",
-        "note",
-        "gluten_status",
-    ]
 
 
 admin.site.register(models.Supplier, SupplierAdmin)
