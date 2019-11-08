@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <form class="row mt-4" action="/">
+  <form class="mt-4" action="/">
     <div class="input-group">
-      <input type="text" name="q" value="{{ form.q.value|default_if_none:'' }}" class="form-control" placeholder="Gluten bilgisini almak istediğiniz ürünün adını yazın ">
+      <input type="text" name="q" value="{{ form.q.value|default_if_none:'' }}" class="form-control" placeholder="Bilgi almak istediğiniz ürünün adını yazın ">
       <div class="input-group-append">
         <button class="btn btn-primary" type="submit">
           <i class="fa fa-search"></i>

@@ -9,12 +9,11 @@
     <style>
       body {max-width: 600px; margin: 0 auto;}
     </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <div id="content" class="container mt-5">
-      <div class="row">
-        <h2 class="text-center"><a href="{% url 'index' %}">Gluter</a></h2><small>Glutensiz ürün arama motoru</small>
-      </div>
+      <h4 class="text-center"><a href="{% url 'index' %}">Glutensiz Ürün Veritabanı</a></h4>
       {% block content %}{% endblock %}
     </div>
   </body>
