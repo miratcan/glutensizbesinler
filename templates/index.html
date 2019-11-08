@@ -3,7 +3,7 @@
 {% block content %}
   <form class="row mt-4" action="/">
     <div class="input-group">
-      <input type="text" name="q" value="{{ form.q.value|default_if_none:'' }}" class="form-control" placeholder="Type product for gluten info">
+      <input type="text" name="q" value="{{ form.q.value|default_if_none:'' }}" class="form-control" placeholder="Gluten bilgisini almak istediğiniz ürünün adını yazın ">
       <div class="input-group-append">
         <button class="btn btn-primary" type="submit">
           <i class="fa fa-search"></i>
@@ -11,8 +11,7 @@
       </div>
     </div>
   </form>
-
- {% if form.q.value %}
+  {% if form.q.value %}
     {% for object in object_list %}
       <p class="border-bottom pb-3">
         <a href="{{object.get_absolute_url}}">{{object.name}}</a><br><small>{{object.brand.name}}</small>
@@ -44,7 +43,6 @@
   <div class="mt-4 text-center">
     <a class="btn btn-link" href="{% url 'supplier_list' %}">Ürün Sağlayıcılar</a> 
     <a class="btn btn-link" href="{% url 'brand_list' %}">Markalar</a> 
-    <a class="btn btn-link" href="">Son Güncellemeler</a> 
-    <a class="btn btn-link" href="">Yemek Tarifleri</a> 
+    <a class="btn btn-link" href="">İstatistikler</a> 
   </div>
 {% endblock %}

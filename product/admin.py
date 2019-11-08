@@ -1,5 +1,5 @@
-from django.contrib import admin
 from django import forms
+from django.contrib import admin
 
 from . import models
 
@@ -53,6 +53,9 @@ class ProductAdmin(admin.ModelAdmin):
     ]
     readonly_fields = [
         "gluten_status",
+    ]
+    filter_horizontal = [
+        "suppliers"
     ]
 
 
