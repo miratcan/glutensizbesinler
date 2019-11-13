@@ -4,6 +4,10 @@ from django.contrib import admin
 from . import models
 
 
+class NameAndSlugMixin(object):
+    prepopulated_fields = {"slug": ("name",)}
+
+
 class SupplierAdminForm(forms.ModelForm):
 
     class Meta:
@@ -11,14 +15,9 @@ class SupplierAdminForm(forms.ModelForm):
         fields = "__all__"
 
 
-class SupplierAdmin(admin.ModelAdmin):
+class SupplierAdmin(NameAndSlugMixin, admin.ModelAdmin):
     form = SupplierAdminForm
-    list_display = [
-        "name",
-        "phone_number",
-        "google_place_id",
-        "address",
-    ]
+    list_display = ["name",]
 
 
 class BrandAdminForm(forms.ModelForm):
@@ -28,24 +27,30 @@ class BrandAdminForm(forms.ModelForm):
         fields = "__all__"
 
 
-class BrandAdmin(admin.ModelAdmin):
+class BrandAdmin(NameAndSlugMixin, admin.ModelAdmin):
     form = BrandAdminForm
-    list_display = [
-        "name"
-    ]
-    readonly_fields = [
-    ]
+    list_display = ["name"]
+
+
+class ObtainMethodInline(admin.TabularInline):
+    model = models.ObtainMethod
 
 
 class ProductAdminForm(forms.ModelForm):
-
+    
     class Meta:
         model = models.Product
+        prepopulated_fields = {"slug": ("name",)}
         fields = "__all__"
 
 
-class ProductAdmin(admin.ModelAdmin):
+
+class ProductAdmin(NameAndSlugMixin, admin.ModelAdmin):
     form = ProductAdminForm
+    inlines = (ObtainMethodInline,)
+    exclude = [
+        'suppliers',
+    ]
     list_display = [
         "name",
         "brand",
@@ -55,7 +60,7 @@ class ProductAdmin(admin.ModelAdmin):
         "gluten_status",
     ]
     filter_horizontal = [
-        "suppliers"
+        "suppliers", "evidences"
     ]
 
 
@@ -66,7 +71,7 @@ class SupplierTypeAdminForm(forms.ModelForm):
         fields = "__all__"
 
 
-class SupplierTypeAdmin(admin.ModelAdmin):
+class SupplierTypeAdmin(NameAndSlugMixin, admin.ModelAdmin):
     form = SupplierTypeAdminForm
     readonly_fields = [
     ]

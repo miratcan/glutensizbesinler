@@ -6,16 +6,16 @@
   <tr><th>Ürün adı</th><td>{{ object.name }}</td>
   <tr><th>Marka</th><td><a href="{% url 'brand_detail' object.brand.pk %}">{{ object.brand }}</a></td>
   <tr><th>Gluten Durumu</th><td>{{ object.get_gluten_status_display }}</td>
+  {% for obtain_method in product.obtain_methods.all %}
   <tr>
-    <th>Tedarikçiler</th>
+    {% if forloop.first %}
+      <th rowspan="{{ product.obtain_methods.all.count }}">Tedarik Yöntemleri</th>
+    {% endif %}
     <td>
-      <ul style="padding-left: 1em">
-        {% for supplier in product.suppliers.all %}
-          <li><a href="{% url 'supplier_detail' supplier.id %}">{{ supplier.name }}</a></li>
-        {% endfor %}
-    </ul>
+      <p><strong>{{ obtain_method.supplier }}</strong></p>
+      <p><a href="{{ obtain_method.data.product_url }}">Link</a></p>
     </td>
   </tr>
+  {% endfor %}
 </table>
-<button class="btn btn-secondary">Kanıt Gönder</button>
 {% endblock %}

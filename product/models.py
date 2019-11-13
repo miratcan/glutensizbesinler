@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django_mysql.models import JSONField, Model
 
 GLUTEN_STATUSES = (
     (None, 'Bilinmiyor'),
@@ -8,11 +9,11 @@ GLUTEN_STATUSES = (
 )
 
 
-class NameAndSlug(models.Model):
+class NameAndSlug(Model):
 
     #  Fields
-    slug = models.SlugField(max_length=100)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True)
 
     class Meta:
         abstract = True
@@ -21,7 +22,7 @@ class NameAndSlug(models.Model):
         return str(self.name)
 
 
-class BaseModel(models.Model):
+class BaseModel(Model):
 
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -31,7 +32,7 @@ class BaseModel(models.Model):
 
 
 class SupplierType(BaseModel, NameAndSlug):
-
+    fields = JSONField(default=list)
     def get_absolute_url(self):
         return reverse("supplier_type_detail", args=(self.pk,))
 
@@ -40,12 +41,7 @@ class Supplier(BaseModel, NameAndSlug):
 
     #  Relationships
     type = models.ForeignKey(SupplierType, on_delete=models.CASCADE)
-
-    #  Fields
-    description = models.TextField(null=True, blank=True)
-    phone_number = models.CharField(max_length=100, null=True, blank=True)
-    google_place_id = models.CharField(max_length=64, null=True, blank=True)
-    address = models.TextField(null=True, blank=True)
+    data = JSONField(null=True, blank=True, default=dict)
 
     def get_absolute_url(self):
         return reverse("supplier_detail", args=(self.pk,))
@@ -57,11 +53,14 @@ class Brand(BaseModel, NameAndSlug):
         return reverse("brand_detail", args=(self.pk,))
 
 
+
+
 class Product(BaseModel, NameAndSlug):
 
     #  Relationships
-    suppliers = models.ManyToManyField(Supplier, null=True, blank=True)
+    suppliers = models.ManyToManyField(Supplier)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    evidences = models.ManyToManyField('product.Evidence', blank=True)
 
     #  Fields
     gluten_status = models.NullBooleanField(choices=GLUTEN_STATUSES)
@@ -71,6 +70,12 @@ class Product(BaseModel, NameAndSlug):
 
     def get_absolute_url(self):
         return reverse("product_detail", args=(self.pk,))
+
+
+class ObtainMethod(Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="obtain_methods")
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    data = JSONField(null=True, blank=True, default=dict)
 
 
 class Evidence(BaseModel):
