@@ -6,12 +6,11 @@
 <h2 class="mt-3">{{ object.name }}</h2>
 
 {% if object.photo %}
-  <img class="img-fluid" src="{% get_media_prefix %}{{ object.photo.url }}" alt="{{ object.name }}">
+  <img class="img-fluid" src="{{ object.photo.url }}" alt="{{ object.name }}">
 {% endif %}
 
 <table class="table">
   
-  <tr><th>Marka</th><td><a href="{% url 'brand_detail' object.brand.pk %}">{{ object.brand }}</a></td>
   <tr><th>Gluten Durumu</th><td>{{ object.get_gluten_status_display }}</td>
   {% for obtain_method in product.obtain_methods.all %}
   <tr>

@@ -47,7 +47,7 @@ class Brand(BaseModel, NameAndSlug):
 
 
 class Product(BaseModel, NameAndSlug):
-    photo = models.ImageField(upload_to='products/')
+    photo = models.ImageField(upload_to='urunler/')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     evidences = models.ManyToManyField('product.Evidence', blank=True)
     gluten_status = models.PositiveSmallIntegerField(choices=GLUTEN_STATUSES)
@@ -68,7 +68,7 @@ class ObtainMethod(Model):
 
 class Evidence(BaseModel):
     author = models.ForeignKey("auth.User", on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to="upload/images/evidences/")
+    photo = models.ImageField(upload_to="kanitlar/")
     note = models.TextField(null=True, blank=True)
     gluten_status = models.PositiveSmallIntegerField(choices=GLUTEN_STATUSES)
 
