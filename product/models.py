@@ -73,7 +73,8 @@ class Product(BaseModel, NameAndSlug):
 
 
 class ObtainMethod(Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="obtain_methods")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                related_name="obtain_methods")
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     data = JSONField(null=True, blank=True, default=dict)
 
