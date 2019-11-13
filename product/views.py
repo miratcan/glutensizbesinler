@@ -20,14 +20,8 @@ class ProductFilter(BaseFilter):
             return Q(pk=None)
         return build_q(cls.get_search_fields(), params, request)
 
-
-class SupplierListView(generic.ListView):
-    model = models.Supplier
-
-
 class SupplierDetailView(generic.DetailView):
     model = models.Supplier
-
 
 class BrandListView(generic.ListView):
     model = models.Brand

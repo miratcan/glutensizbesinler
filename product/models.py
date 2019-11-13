@@ -3,15 +3,15 @@ from django.urls import reverse
 from django_mysql.models import JSONField, Model
 
 GLUTEN_STATUSES = (
-    (None, 'Bilinmiyor'),
-    (True, 'Var'),
-    (False, 'Yok'),
+    (0, 'Yok'),
+    (1, 'Büyük İhtimalle Yok'),
+    (2, 'Belirsiz'),
+    (3, 'Küçük İhtimalle Var'),
+    (3, 'Büyük İhtimalle Var'),
 )
 
 
 class NameAndSlug(Model):
-
-    #  Fields
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
 
@@ -23,7 +23,6 @@ class NameAndSlug(Model):
 
 
 class BaseModel(Model):
-
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
@@ -32,38 +31,26 @@ class BaseModel(Model):
 
 
 class SupplierType(BaseModel, NameAndSlug):
-    fields = JSONField(default=list)
     def get_absolute_url(self):
         return reverse("supplier_type_detail", args=(self.pk,))
 
 
 class Supplier(BaseModel, NameAndSlug):
-
-    #  Relationships
     type = models.ForeignKey(SupplierType, on_delete=models.CASCADE)
-    data = JSONField(null=True, blank=True, default=dict)
-
     def get_absolute_url(self):
         return reverse("supplier_detail", args=(self.pk,))
 
 
 class Brand(BaseModel, NameAndSlug):
-
     def get_absolute_url(self):
         return reverse("brand_detail", args=(self.pk,))
 
 
-
-
 class Product(BaseModel, NameAndSlug):
-
-    #  Relationships
-    suppliers = models.ManyToManyField(Supplier)
+    photo = models.ImageField(upload_to='products/')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     evidences = models.ManyToManyField('product.Evidence', blank=True)
-
-    #  Fields
-    gluten_status = models.NullBooleanField(choices=GLUTEN_STATUSES)
+    gluten_status = models.PositiveSmallIntegerField(choices=GLUTEN_STATUSES)
 
     def __str__(self):
         return str(self.name)
@@ -80,14 +67,10 @@ class ObtainMethod(Model):
 
 
 class Evidence(BaseModel):
-
-    #  Relationships
     author = models.ForeignKey("auth.User", on_delete=models.CASCADE)
-
-    #  Fields
     photo = models.ImageField(upload_to="upload/images/evidences/")
     note = models.TextField(null=True, blank=True)
-    gluten_status = models.NullBooleanField(choices=GLUTEN_STATUSES)
+    gluten_status = models.PositiveSmallIntegerField(choices=GLUTEN_STATUSES)
 
     def __str__(self):
         return str(self.pk)

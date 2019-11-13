@@ -12,7 +12,6 @@ router.register("Evidence", api.EvidenceViewSet)
 
 urlpatterns = (
     path("api/v1/", include(router.urls)),
-    path("tedarikciler/", views.SupplierListView.as_view(), name="supplier_list"),
     path("tedarikci/<int:pk>/",
         views.SupplierDetailView.as_view(), name="supplier_detail"),
     path("markalar/", views.BrandListView.as_view(), name="brand_list"),

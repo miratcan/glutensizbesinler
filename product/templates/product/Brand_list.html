@@ -2,6 +2,6 @@
 {% extends "base.html" %}
 {% block content %}
 {% for object in object_list %}
-  <div class="m-2"><a href="{{object.get_absolute_url}}">{{object}}</a></div>
+  <a class="btn btn-link" href="{{object.get_absolute_url}}">{{object}}</a>
 {% endfor %}
 {% endblock %}
