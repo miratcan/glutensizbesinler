@@ -6,14 +6,13 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     crossorigin="anonymous">
-    <style>
-      body {max-width: 600px; margin: 0 auto;}
-    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <div id="content" class="container mt-5">
-      <h1 class=""><a href="{% url 'index' %}">Glutensiz Besinler</a></h1>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'index' %}">Glutensiz Besinler</a>
+    </nav>
+    <div id="content" class="container mt-5" style="max-width: 600px;">
       {% block content %}{% endblock %}
     </div>
   </body>

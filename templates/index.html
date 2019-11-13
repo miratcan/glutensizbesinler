@@ -17,7 +17,7 @@
         <a href="{{object.get_absolute_url}}">{{object.name}}</a><br><small>{{object.brand.name}}</small>
       </p>
     {% empty %}
-      <p class="alert alert-warning" role="alert">No Product Found</p>
+      <p class="alert alert-warning" role="alert">Hiç bir ürün bulunamadı</p>
     {% endfor %}
     {% if is_paginated %}
       <ul class="pagination">

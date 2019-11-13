@@ -10,7 +10,6 @@
 {% endif %}
 
 <table class="table">
-  
   <tr><th>Gluten Durumu</th><td>{{ object.get_gluten_status_display }}</td>
   {% for obtain_method in product.obtain_methods.all %}
   <tr>
