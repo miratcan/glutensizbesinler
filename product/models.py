@@ -6,8 +6,8 @@ GLUTEN_STATUSES = (
     (0, 'Yok'),
     (1, 'Büyük İhtimalle Yok'),
     (2, 'Belirsiz'),
-    (3, 'Küçük İhtimalle Var'),
     (3, 'Büyük İhtimalle Var'),
+    (4, 'Var'),
 )
 
 
@@ -50,7 +50,7 @@ class Product(BaseModel, NameAndSlug):
     photo = models.ImageField(upload_to='urunler/')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     evidences = models.ManyToManyField('product.Evidence', blank=True)
-    gluten_status = models.PositiveSmallIntegerField(choices=GLUTEN_STATUSES)
+    gluten_status = models.PositiveSmallIntegerField(choices=GLUTEN_STATUSES, default=2)
 
     def __str__(self):
         return str(self.name)
@@ -70,7 +70,7 @@ class Evidence(BaseModel):
     author = models.ForeignKey("auth.User", on_delete=models.CASCADE)
     photo = models.ImageField(upload_to="kanitlar/")
     note = models.TextField(null=True, blank=True)
-    gluten_status = models.PositiveSmallIntegerField(choices=GLUTEN_STATUSES)
+    gluten_status = models.PositiveSmallIntegerField(choices=GLUTEN_STATUSES, default=2)
 
     def __str__(self):
         return str(self.pk)
