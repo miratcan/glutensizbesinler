@@ -3,11 +3,11 @@ from django.urls import reverse
 from django_mysql.models import JSONField, Model
 
 GLUTEN_STATUSES = (
-    (0, 'Yok'),
+    (0, 'Glutensiz'),
     (1, 'Büyük İhtimalle Yok'),
     (2, 'Belirsiz'),
     (3, 'Büyük İhtimalle Var'),
-    (4, 'Var'),
+    (4, 'Glutenli'),
 )
 
 
