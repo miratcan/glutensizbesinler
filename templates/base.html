@@ -10,7 +10,9 @@
   </head>
   <body>
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="{% url 'index' %}">Glutensiz Besinler</a>
+      <div class="container" style="max-width: 600px;">
+        <a class="navbar-brand" href="{% url 'index' %}">Glutensiz Besinler</a>
+      </div>
     </nav>
     <div id="content" class="container mt-5" style="max-width: 600px;">
       {% block content %}{% endblock %}

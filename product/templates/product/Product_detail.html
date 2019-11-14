@@ -2,25 +2,28 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<div class="card">
+  {% if object.photo %}
+    <img src="{{ object.photo.url }}" class="card-img-top" alt="{{ object.name }}">
+  {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{ object.name }}</h5>
+    <table class="table">
+      <tr><th>Gluten Durumu</th><td>{{ object.get_gluten_status_display }}</td>
+      {% for obtain_method in product.obtain_methods.all %}
+      <tr>
+        {% if forloop.first %}
+          <th rowspan="{{ product.obtain_methods.all.count }}">Tedarik Yöntemleri</th>
+        {% endif %}
+        <td>
+          <dt>{{ obtain_method.supplier }}</dt>
+          <dd><a href="{{ obtain_method.data.product_url }}">Link</a></dd>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
 
-<h2 class="mt-3">{{ object.name }}</h2>
 
-{% if object.photo %}
-  <img class="img-fluid" src="{{ object.photo.url }}" alt="{{ object.name }}">
-{% endif %}
-
-<table class="table">
-  <tr><th>Gluten Durumu</th><td>{{ object.get_gluten_status_display }}</td>
-  {% for obtain_method in product.obtain_methods.all %}
-  <tr>
-    {% if forloop.first %}
-      <th rowspan="{{ product.obtain_methods.all.count }}">Tedarik Yöntemleri</th>
-    {% endif %}
-    <td>
-      <p><strong>{{ obtain_method.supplier }}</strong></p>
-      <p><a href="{{ obtain_method.data.product_url }}">Link</a></p>
-    </td>
-  </tr>
-  {% endfor %}
-</table>
+  </div>
+</div>
 {% endblock %}
