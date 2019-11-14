@@ -7,7 +7,7 @@
     <img src="{{ object.photo.url }}" class="card-img-top" alt="{{ object.name }}">
   {% endif %}
   <div class="card-body">
-    <h5 class="card-title">{{ object.name }}</h5>
+    <h5 class="text-center card-title">{{ object.name }}</h5>
     <table class="table">
       <tr><th>Gluten Durumu</th><td>{{ object.get_gluten_status_display }}</td>
       {% for obtain_method in product.obtain_methods.all %}

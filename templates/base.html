@@ -9,12 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-dark bg-dark">
       <div class="container" style="max-width: 600px;">
         <a class="navbar-brand" href="{% url 'index' %}">Glutensiz Besinler</a>
       </div>
     </nav>
-    <div id="content" class="container mt-5" style="max-width: 600px;">
+    <div id="content" class="container mt-4" style="max-width: 600px;">
       {% block content %}{% endblock %}
     </div>
   </body>
