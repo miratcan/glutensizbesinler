@@ -9,19 +9,6 @@ class NameAndSlugMixin(object):
 
 
 class SupplierAdminForm(forms.ModelForm):
-    # TODO
-    def clean(self):
-        cleaned_data = super().clean()
-        data = cleaned_data.get("data")
-        subject = cleaned_data.get("subject")
-
-        if cc_myself and subject:
-            # Only do something if both fields are valid so far.
-            if "help" not in subject:
-                raise forms.ValidationError(
-                    "Did not send for 'help' in the subject despite "
-                    "CC'ing yourself."
-                )
 
     class Meta:
         model = models.Supplier

@@ -10,6 +10,7 @@
     <h5 class="text-center card-title">{{ object.name }}</h5>
     <table class="table">
       <tr><th>Gluten Durumu</th><td>{{ object.get_gluten_status_display }}</td>
+      {% if object.description %}<tr><th>Açıklama</th><td>{{ object.description }}</td>{% endif %}
       {% for obtain_method in product.obtain_methods.all %}
       <tr>
         {% if forloop.first %}
@@ -22,8 +23,6 @@
       </tr>
       {% endfor %}
     </table>
-
-
   </div>
 </div>
 {% endblock %}

@@ -47,6 +47,7 @@ class Brand(BaseModel, NameAndSlug):
 
 
 class Product(BaseModel, NameAndSlug):
+    description = models.TextField(null=True, blank=True)
     photo = models.ImageField(upload_to='urunler/')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     evidences = models.ManyToManyField('product.Evidence', blank=True)
