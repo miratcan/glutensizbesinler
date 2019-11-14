@@ -67,7 +67,6 @@ class ProductAdmin(NameAndSlugMixin, admin.ModelAdmin):
         "gluten_status",
     ]
     readonly_fields = [
-        "gluten_status",
     ]
     filter_horizontal = [
         "evidences"
