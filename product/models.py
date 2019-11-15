@@ -64,6 +64,7 @@ class ObtainMethod(Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE,
                                 related_name="obtain_methods")
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    product_url  = models.URLField(null=True, blank=True)
     data = JSONField(null=True, blank=True, default=dict)
 
 
