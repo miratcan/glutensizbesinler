@@ -11,6 +11,10 @@
       </div>
     </div>
   </form>
+    {% if not form.q.value %}
+    <small>Örnek aramalar: <a href="/?q=%C3%A7ikolata">Çikolata</a>, <a href="/?q=gofret">Gofret</a>, <a href="/?q=ekmek">Ekmek</a></small>
+    {% endif %}
+
   {% if form.q.value %}
     {% for object in object_list %}
       <p class="border-bottom pb-3">
