@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_mysql',
     'jsoneditor',
     'product',
+    'ganalytics'
 ]
 
 MIDDLEWARE = [
