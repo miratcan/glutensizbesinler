@@ -16,11 +16,12 @@
         {% if forloop.first %}
           <th rowspan="{{ product.obtain_methods.all.count }}">Tedarik Yöntemleri</th>
         {% endif %}
-        {% if obtain_metthod.supplier.type == '' %}
+        {% if obtain_method.supplier.type.slug == 'online-market' %}
         <td>
           <dt>{{ obtain_method.supplier }}</dt>
           <dd><a href="{{ obtain_method.product_url }}">Link</a></dd>
         </td>
+        {% endif %}
       </tr>
       {% endfor %}
     </table>
